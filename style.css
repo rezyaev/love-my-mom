@@ -1,1 +1,84 @@
 @import 'variables.css';
+
+/* Reset browser */
+body {
+	margin: 0;
+}
+
+button {
+	border: none;
+}
+
+/* Base */
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url('assets/fonts/roboto-regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	padding: var(--size-2);
+
+	font-size: var(--font-size-2);
+	font-family: 'Roboto', sans-serif;
+	line-height: 1.5;
+
+	color: var(--neutral-8);
+
+	background-color: var(--neutral-0);
+}
+
+/* Components */
+
+.button {
+	padding: var(--size-1) var(--size-2);
+
+	font-size: var(--font-size-2);
+
+	border-radius: var(--size-0);
+}
+
+.button-primary {
+	color: var(--primary-9);
+
+	background-color: var(--primary-3);
+}
+
+/* Main page */
+
+body {
+	display: grid;
+	grid: 2fr 1fr 2fr / 1fr;
+	justify-items: center;
+	align-items: center;
+}
+
+img {
+	border: 2px solid var(--neutral-7);
+
+	border-radius: 50%;
+}
+
+figcaption {
+	font-size: var(--font-size-4);
+	text-align: center;
+}
+
+.congratulations-card {
+	padding: var(--size-1);
+
+	border-radius: var(--size-1);
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
