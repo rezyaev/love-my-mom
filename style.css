@@ -1,12 +1,18 @@
 @import 'variables.css';
 
 /* Reset browser */
-body {
+body,
+p {
 	margin: 0;
 }
 
 button {
 	border: none;
+}
+
+/* Remove dotted outline */
+button::-moz-focus-inner {
+	border: 0;
 }
 
 /* Base */
@@ -19,6 +25,8 @@ button {
 html,
 body {
 	height: 100%;
+
+	overflow: hidden;
 }
 
 @font-face {
@@ -36,31 +44,48 @@ body {
 	line-height: 1.5;
 
 	color: var(--neutral-8);
-
 	background-color: var(--neutral-0);
 }
 
 /* Components */
 
-.button {
+button {
 	padding: var(--size-1) var(--size-2);
 
 	font-size: var(--font-size-2);
 
 	border-radius: var(--size-0);
+	box-shadow: 0 4px 6px hsla(0deg, 0%, 0%, 0.2);
+
+	transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+button:focus {
+	box-shadow: 0 0 0 3px hsla(227deg, 50%, 59%, 0.5),
+		0 4px 6px hsla(0deg, 0%, 0%, 0.2);
 }
 
 .button-primary {
 	color: var(--primary-9);
 
+	background-color: var(--primary-2);
+}
+
+.button-primary:hover {
 	background-color: var(--primary-3);
+}
+
+.button-primary:active {
+	background-color: var(--primary-3);
+
+	box-shadow: 0 1px 3px hsla(0deg, 0%, 0%, 0.2);
 }
 
 /* Main page */
 
 body {
 	display: grid;
-	grid: 2fr 1fr 2fr / 1fr;
+	grid: 2fr 1fr 3fr / 1fr;
 	justify-items: center;
 	align-items: center;
 }
@@ -76,9 +101,29 @@ figcaption {
 	text-align: center;
 }
 
-.congratulations-card {
-	padding: var(--size-1);
+.congratulation-card {
+	padding: var(--size-3);
+
+	background-color: white;
 
 	border-radius: var(--size-1);
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 4px 6px hsla(0deg, 0%, 0%, 0.2);
+	transform: translateX(0);
+
+	transition: transform 0.3s ease-in-out;
+}
+
+.congratulation-card-removed {
+	transform: translateX(-105%);
+}
+
+.congratulation-card-added {
+	transform: translateX(105%);
+}
+
+.author {
+	font-size: var(--font-size-1);
+	text-align: right;
+
+	color: var(--neutral-6);
 }
