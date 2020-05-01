@@ -1,20 +1,9 @@
-import { congratulations } from './congratulations.js';
+import { getCongratulations } from './congratulations.js';
 
 /** @type {HTMLButtonElement} */
 const getCongratulationsButton = document.querySelector('button');
 /** @type {HTMLDivElement} */
 let congratulationCard = document.querySelector('.congratulation-card');
-
-/**
- * @param {number} min
- * @param {number} max
- * @returns {number}
- */
-const getRandomIntInclusive = (min, max) => {
-	min = Math.ceil(min);
-	max = Math.floor(max);
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-};
 
 /**
  * @param {string} congratulation
@@ -28,7 +17,7 @@ const createCongratulationCard = (congratulation, author) => {
 
 	const congratulationParagraph = document.createElement('p');
 	congratulationParagraph.classList.add('congratulation');
-	congratulationParagraph.textContent = congratulation;
+	congratulationParagraph.innerHTML = congratulation;
 
 	const authorParagraph = document.createElement('p');
 	authorParagraph.classList.add('author');
@@ -40,13 +29,19 @@ const createCongratulationCard = (congratulation, author) => {
 	return cardDiv;
 };
 
-getCongratulationsButton.addEventListener('click', () => {
-	const randomCongratulationIndex = getRandomIntInclusive(
-		0,
-		congratulations.length - 1
-	);
+let congratulations = getCongratulations();
+let congratulationIndex = 0;
 
-	const { congratulation, author } = congratulations[randomCongratulationIndex];
+getCongratulationsButton.addEventListener('click', () => {
+	const { congratulation, author } = congratulations[congratulationIndex];
+
+	congratulationIndex += 1;
+
+	// If all congratulations have been seen, get new randomized array and reset index
+	if (congratulationIndex >= congratulations.length) {
+		congratulations = getCongratulations();
+		congratulationIndex = 0;
+	}
 
 	// Create and append new card on old card removal
 	congratulationCard.addEventListener('transitionend', (event) => {
